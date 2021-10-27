@@ -9,7 +9,7 @@ app.use(express.json({extended: true}));
 
 app.use('/api/auth', require('./Routes/auth.routes'))
 app.use('/api/nickname', require('./Routes/link.routes'))
-app.use('/dakon', require('./Routes/redirect.routes'))
+app.use('/api/clicker', require('./Routes/clicker.routes'))
 app.use('/delete', require('./Routes/delete.route'))
 
 if(process.env.NODE_ENV === 'production'){

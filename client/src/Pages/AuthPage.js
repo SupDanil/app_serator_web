@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import {useHttp} from "../Hooks/http.hook";
 import {useMessage} from "../Hooks/message.hook";
 import {AuthContext} from "../Context/AuthContext";
@@ -15,6 +15,15 @@ export const AuthPage = () => {
     const [platformSelect, setPlatformSelect] = useState()
     const width = window.innerWidth < 700
 
+
+    const clickPlus = useCallback(async () => {
+        try {
+            const fetched = await request('/api/clicker', 'POST', null)
+            console.log(fetched)
+        } catch (e) {
+        }
+    }, [request])
+
     useEffect(() => {
         if (width) {
             setPlatformSelect("tap")
@@ -25,6 +34,7 @@ export const AuthPage = () => {
 
 
     const goToNextPage = () => {
+        clickPlus()
         if (checked) {
             history.push('/create')
         }

@@ -7,6 +7,7 @@ export const DakonPage = () => {
 
     const [nickName, setNickName] = useState('')
     const [allNicks, setAllNicks] = useState([])
+    const [click, setClick] = useState()
     const {request} = useHttp()
     const history = useHistory()
     useEffect(() => {
@@ -17,7 +18,8 @@ export const DakonPage = () => {
     const fetchNicks = useCallback(async () => {
         try {
             const fetched = await request('/api/nickname', 'GET', null)
-            setAllNicks(fetched)
+            setAllNicks(fetched.nicks)
+            setClick(fetched.clicks)
         } catch (e) {
         }
     }, [request])
@@ -35,6 +37,7 @@ export const DakonPage = () => {
                 const data = await request('/api/nickname/generate', 'POST', {nickname: nickName})
                 if (data) {
                     fetchNicks()
+                    setNickName('')
                 }
             } catch (e) {
             }
@@ -42,8 +45,9 @@ export const DakonPage = () => {
     }
 
     return (
-        <div>
+        <div style={{height: "600px", overflow: "scroll", marginTop: "40px"}}>
             <div className="input-field" style={{color: "#fff"}}>
+
                 <input
                     style={{color: "#fff"}}
                     placeholder="Добавить Ник"
@@ -54,7 +58,7 @@ export const DakonPage = () => {
                 />
                 <label htmlFor="link">Введите кличку</label>
             </div>
-            <DakonList nicks={allNicks} fetchNicks={fetchNicks}/>
+            <DakonList nicks={allNicks} fetchNicks={fetchNicks} clicks={click}/>
         </div>
     )
 }

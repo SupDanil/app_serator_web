@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {useHttp} from "../Hooks/http.hook";
 
-export const DakonList = ({nicks,fetchNicks}) => {
+export const DakonList = ({nicks,fetchNicks, clicks}) => {
 
     const {request} = useHttp()
     const [id, setId] = useState('')
@@ -24,8 +24,9 @@ export const DakonList = ({nicks,fetchNicks}) => {
 
 
     return (
-        <table>
+        <table className="dakon_list">
             <thead style={{color:"#fff"}}>
+            <div>Количество кликов:{clicks}</div>
             <tr>
                 <th>Ники</th>
             </tr>

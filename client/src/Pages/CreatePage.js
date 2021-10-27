@@ -1,6 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {useHttp} from "../Hooks/http.hook";
-import {AuthContext} from "../Context/AuthContext";
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom'
 
 
@@ -13,6 +11,8 @@ export const CreatePage = () => {
         window.M.updateTextFields()
     }, [])
 
+
+
     const pressHandler = async event => {
         if (event.key === 'Enter') {
             history.push(`/detail/${name}`);
@@ -20,6 +20,7 @@ export const CreatePage = () => {
     }
 
     const goNext = () => {
+
         history.push(`/detail/${name}`);
     }
 

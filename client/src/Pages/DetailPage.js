@@ -38,10 +38,6 @@ export const DetailPage = () => {
         let rand = min + Math.random() * (max + 1 - min);
         return Math.floor(rand)
 
-        // if(typeof nicks[random] !== "undefined" ){
-        //     setNick(nicks[random].nickname,()=>console.log(nick))
-        // }
-
     }
 
     const fetchNicks = useCallback(async () => {
@@ -50,7 +46,14 @@ export const DetailPage = () => {
             if (fetched) {
                 setLoading(true)
             }
-            setSetNicks(fetched)
+            setSetNicks(fetched.nicks)
+        } catch (e) {
+        }
+    }, [request])
+
+    const clickPlus = useCallback(async () => {
+        try {
+            const fetched = await request('/api/clicker', 'POST', null)
         } catch (e) {
         }
     }, [request])
@@ -65,7 +68,10 @@ export const DetailPage = () => {
         return <Loader/>
     }
 
+
+
     const goPrev = () => {
+        clickPlus()
         history.push('/create')
     }
 
